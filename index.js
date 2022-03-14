@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 
 const postRoutes = require("./routes/users");
+const loanRoutes = require("./routes/loans");
 
 const app = express();
 
@@ -12,6 +13,7 @@ app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
 
 app.use("/users", postRoutes);
+app.use("/loans", loanRoutes);
 
 app.get("/", (req, res) => {
   res.send("Hello to CVSU-LOAN API");
