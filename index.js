@@ -5,6 +5,7 @@ const cors = require("cors");
 
 const postRoutes = require("./routes/users");
 const loanRoutes = require("./routes/loans");
+const notificationRoutes = require("./routes/notifications");
 
 const app = express();
 
@@ -14,6 +15,7 @@ app.use(cors());
 
 app.use("/users", postRoutes);
 app.use("/loans", loanRoutes);
+app.use("/notifications", notificationRoutes);
 
 app.get("/", (req, res) => {
   res.send("Hello to CVSU-LOAN API");

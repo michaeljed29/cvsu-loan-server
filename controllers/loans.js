@@ -1,4 +1,5 @@
 const LoanModel = require("../models/loanModel");
+const { createNotification } = require("./utils");
 
 const getLoans = async (req, res) => {
   try {
@@ -27,6 +28,8 @@ const createLoan = async (req, res) => {
 
     const result = await LoanModel.create(loan);
 
+    await createNotification(result.userId, result._id, result.status);
+
     res.status(200).json(result);
   } catch (err) {
     res.status(500).json({ message: "Something went wrong" });
@@ -45,6 +48,8 @@ const setLoanStatus = async (req, res) => {
         new: true,
       }
     );
+
+    await createNotification(result.userId, result._id, status);
 
     res.status(200).json(result);
   } catch (err) {
