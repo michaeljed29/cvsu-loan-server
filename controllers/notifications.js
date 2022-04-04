@@ -3,7 +3,7 @@ const NotificationModel = require("../models/notificationModel");
 const getNotifications = async (req, res) => {
   const { userId } = req.query;
 
-  const filter = userId ? { userId } : {};
+  const filter = userId ? { userId } : { type: "pending" };
 
   try {
     const notifications = await NotificationModel.find(filter)
