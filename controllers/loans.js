@@ -39,7 +39,7 @@ const createLoan = async (req, res) => {
 const setLoanStatus = async (req, res) => {
   try {
     const { id } = req.params;
-    const { status } = req.body;
+    const { status, approverId } = req.body;
 
     const result = await LoanModel.findByIdAndUpdate(
       id,
@@ -49,7 +49,7 @@ const setLoanStatus = async (req, res) => {
       }
     );
 
-    await createNotification(result.userId, result._id, status);
+    await createNotification(result.userId, result._id, status, approverId);
 
     res.status(200).json(result);
   } catch (err) {

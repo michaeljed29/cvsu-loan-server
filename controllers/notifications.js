@@ -4,7 +4,8 @@ const getNotifications = async (req, res) => {
   try {
     const notifications = await NotificationModel.find()
       .populate("userId")
-      .populate("loanId");
+      .populate("loanId")
+      .populate("approverId");
     res.status(200).json(notifications);
   } catch (err) {
     res.status(404).json({ message: "Something went wrong" });
