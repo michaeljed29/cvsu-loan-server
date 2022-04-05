@@ -19,6 +19,22 @@ const getNotifications = async (req, res) => {
   }
 };
 
+const getNewNotifications = async (req, res) => {
+  const { userId } = req.query;
+
+  const filter = userId
+    ? { userId, type: { $ne: "pending" }, seen: false }
+    : { type: "pending", seen: false };
+
+  try {
+    const notifications = await NotificationModel.find(filter);
+
+    res.status(200).json({ count: notifications.length });
+  } catch (err) {
+    res.status(404).json({ message: "Something went wrong" });
+  }
+};
+
 const setNotificationStatus = async (req, res) => {
   try {
     const { id } = req.params;
@@ -39,4 +55,5 @@ const setNotificationStatus = async (req, res) => {
 };
 
 exports.getNotifications = getNotifications;
+exports.getNewNotifications = getNewNotifications;
 exports.setNotificationStatus = setNotificationStatus;
