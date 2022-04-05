@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const moment = require("moment");
 const Types = mongoose.Schema.Types;
 
 const loanSchema = mongoose.Schema({
@@ -26,6 +27,10 @@ const loanSchema = mongoose.Schema({
   createdAt: {
     type: Date,
     default: new Date(),
+  },
+  date: {
+    type: String,
+    default: moment().format("YYYY-MM-DD"),
   },
 });
 
