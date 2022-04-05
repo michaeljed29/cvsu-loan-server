@@ -7,6 +7,7 @@ const createNotification = async (userId, loanId, type, approverId) => {
       loanId,
       type,
       approverId,
+      createdAt: new Date(),
     });
   } catch (err) {
     res.status(404).json({ message: "Something went wrong" });
