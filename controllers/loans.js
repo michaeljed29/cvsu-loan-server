@@ -2,8 +2,10 @@ const LoanModel = require("../models/loanModel");
 const { createNotification } = require("./utils");
 
 const getLoans = async (req, res) => {
+  const { userId } = req.query;
+  const filter = userId ? { userId } : {};
   try {
-    const loans = await LoanModel.find().populate("userId");
+    const loans = await LoanModel.find(filter).populate("userId");
     res.status(200).json(loans);
   } catch (err) {
     res.status(404).json({ message: "Something went wrong" });
