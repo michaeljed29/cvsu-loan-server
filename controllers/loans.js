@@ -2,10 +2,10 @@ const LoanModel = require("../models/loanModel");
 const { createNotification } = require("./utils");
 
 const getLoans = async (req, res) => {
-  const { userId, month } = req.query;
+  const { userId, date } = req.query;
   const filter = userId ? { userId } : {};
 
-  if (month) filter.month = month;
+  if (date) filter.date = date;
 
   try {
     const loans = await LoanModel.find(filter).populate("userId");
