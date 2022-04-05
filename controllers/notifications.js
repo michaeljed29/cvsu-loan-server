@@ -4,7 +4,7 @@ const getNotifications = async (req, res) => {
   const { userId } = req.query;
 
   const filter = userId
-    ? { userId, type: { $ne: "type" } }
+    ? { userId, type: { $ne: "pending" } }
     : { type: "pending" };
 
   try {
