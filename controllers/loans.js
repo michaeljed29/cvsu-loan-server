@@ -9,7 +9,10 @@ const getLoans = async (req, res) => {
   if (date) filter.date = date;
 
   try {
-    const loans = await LoanModel.find(filter).populate("userId");
+    const loans = await LoanModel.find(filter)
+      .populate("userId")
+      .sort({ createdAt: -1 });
+
     res.status(200).json(loans);
   } catch (err) {
     res.status(404).json({ message: "Something went wrong" });
