@@ -19,6 +19,9 @@ const loanSchema = mongoose.Schema({
     type: String,
     default: "pending",
   },
+  verificationCode: {
+    type: String,
+  },
   userId: {
     type: Types.ObjectId,
     ref: "User",

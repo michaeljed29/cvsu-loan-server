@@ -1,5 +1,6 @@
 const LoanModel = require("../models/loanModel");
 const { createNotification } = require("./utils");
+const generator = require("generate-password");
 
 const getLoans = async (req, res) => {
   const { userId, date } = req.query;
@@ -31,7 +32,12 @@ const createLoan = async (req, res) => {
   try {
     const loan = req.body;
 
-    const result = await LoanModel.create(loan);
+    const verificationCode = generator.generate({
+      length: 8,
+      numbers: true,
+    });
+
+    const result = await LoanModel.create({ ...loan, verificationCode });
 
     await createNotification(result.userId, result._id, result.status);
 
