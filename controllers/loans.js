@@ -35,6 +35,7 @@ const createLoan = async (req, res) => {
     const verificationCode = generator.generate({
       length: 8,
       numbers: true,
+      uppercase: true,
     });
 
     const result = await LoanModel.create({ ...loan, verificationCode });
