@@ -32,11 +32,12 @@ const createLoan = async (req, res) => {
   try {
     const loan = req.body;
 
-    const verificationCode = generator.generate({
-      length: 8,
-      numbers: true,
-      uppercase: true,
-    });
+    const verificationCode = generator
+      .generate({
+        length: 8,
+        numbers: true,
+      })
+      .toUpperCase();
 
     const result = await LoanModel.create({ ...loan, verificationCode });
 
