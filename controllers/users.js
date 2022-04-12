@@ -41,8 +41,6 @@ const createUser = async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(initialPassword, 12);
 
-    console.log("initialPassword", initialPassword);
-    console.log("hashedPassword", hashedPassword);
     const result = await UserModel.create({
       ...user,
       password: hashedPassword,
@@ -69,6 +67,26 @@ const updateUser = async (req, res) => {
     res.status(200).json(result);
   } catch (err) {
     res.status(500).json({ message: "Something went wrong" });
+  }
+};
+
+const changePassword = async (req, res) => {
+  try {
+    const { userId, password } = req.body;
+
+    const hashedPassword = await bcrypt.hash(password, 12);
+
+    const result = await UserModel.findByIdAndUpdate(
+      userId,
+      { password: hashedPassword },
+      {
+        new: true,
+      }
+    );
+
+    res.status(200).json(result);
+  } catch (err) {
+    res.status(500).json({ message: "Something went wrongs" });
   }
 };
 
@@ -122,3 +140,4 @@ exports.createUser = createUser;
 exports.updateUser = updateUser;
 exports.deleteUser = deleteUser;
 exports.loginUser = loginUser;
+exports.changePassword = changePassword;
