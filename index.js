@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const dotenv = require("dotenv").config();
 
 const postRoutes = require("./routes/users");
 const loanRoutes = require("./routes/loans");
@@ -21,7 +22,7 @@ app.get("/", (req, res) => {
   res.send("Hello to CVSU-LOAN API");
 });
 
-const CONNECTION_STRING = `mongodb+srv://practiceUser:pass123@cluster0.zq1kk.mongodb.net/loan?retryWrites=true&w=majority`;
+const CONNECTION_STRING = process.env.CONNECTION_STRING;
 const PORT = process.env.PORT || 5000;
 
 mongoose
