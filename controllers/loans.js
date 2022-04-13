@@ -73,7 +73,27 @@ const setLoanStatus = async (req, res) => {
   }
 };
 
+const setMonthly = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { amount } = req.body;
+
+    const result = await LoanModel.findByIdAndUpdate(
+      id,
+      { monthly: amount },
+      {
+        new: true,
+      }
+    );
+
+    res.status(200).json(result);
+  } catch (err) {
+    res.status(500).json({ message: "Something went wrong" });
+  }
+};
+
 exports.getLoans = getLoans;
 exports.getLoan = getLoan;
 exports.createLoan = createLoan;
 exports.setLoanStatus = setLoanStatus;
+exports.setMonthly = setMonthly;

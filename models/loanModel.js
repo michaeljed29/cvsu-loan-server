@@ -22,6 +22,14 @@ const loanSchema = mongoose.Schema({
   verificationCode: {
     type: String,
   },
+  loanType: {
+    type: String,
+    required: true,
+  },
+  monthly: {
+    type: Number,
+    default: 0,
+  },
   userId: {
     type: Types.ObjectId,
     ref: "User",
