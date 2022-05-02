@@ -4,13 +4,13 @@ const LoanModel = require("../models/loanModel");
 const getPayments = async (req, res) => {
   const { userId, loanId } = req.query;
 
-  const filter =
-    userId || loanId
-      ? {
-          userId,
-          loanId,
-        }
-      : {};
+  const filter = {
+    userId,
+    loanId,
+  };
+
+  if (!userId) delete filter.userId;
+  if (!loanId) delete filter.loanId;
 
   try {
     const payments = await PaymentModel.find(filter)
