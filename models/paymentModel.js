@@ -21,6 +21,7 @@ const paymentSchema = mongoose.Schema({
     type: Number,
     required: true,
   },
+  officialReceipt: String,
   createdAt: {
     type: Date,
     default: new Date(),
