@@ -25,6 +25,7 @@ const userSchema = mongoose.Schema({
   address: String,
   position: String,
   department: String,
+  otherDepartment: String,
   type: {
     type: String,
     default: "member",
