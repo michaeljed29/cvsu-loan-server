@@ -5,6 +5,7 @@ const {
   createLoan,
   setLoanStatus,
   setMonthly,
+  setLoanProceeds,
 } = require("../controllers/loans.js");
 const auth = require("./../middleware/auth");
 
@@ -15,5 +16,6 @@ router.get("/:id", auth, getLoan);
 router.post("/", auth, createLoan);
 router.patch("/setMonthly/:id", auth, setMonthly);
 router.patch("/:id", auth, setLoanStatus);
+router.patch("/setLoanProceeds/:id", auth, setLoanProceeds);
 
 module.exports = router;

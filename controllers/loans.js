@@ -52,6 +52,39 @@ const createLoan = async (req, res) => {
   }
 };
 
+const setLoanProceeds = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const loanProceedsData = req.body;
+
+    const loan = await LoanModel.findById(id);
+
+    const deduction = Object.values(loanProceedsData).reduce(
+      (total, amount) => total + amount,
+      0
+    );
+
+    const loanProceedsAmount = loan.amount - deduction;
+
+    loan.loanProceedsAmount = loanProceedsAmount;
+
+    console.log("loan", loan);
+
+    const result = await LoanModel.findByIdAndUpdate(
+      id,
+      { loanProceedsData, loanProceedsAmount },
+      {
+        new: true,
+      }
+    );
+
+    res.status(200).json(result);
+  } catch (err) {
+    console.log("error", err);
+    res.status(500).json({ message: "Something went wrong" });
+  }
+};
+
 const setLoanStatus = async (req, res) => {
   try {
     const { id } = req.params;
@@ -96,4 +129,5 @@ exports.getLoans = getLoans;
 exports.getLoan = getLoan;
 exports.createLoan = createLoan;
 exports.setLoanStatus = setLoanStatus;
+exports.setLoanProceeds = setLoanProceeds;
 exports.setMonthly = setMonthly;

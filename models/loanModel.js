@@ -30,6 +30,36 @@ const loanSchema = mongoose.Schema({
     type: Number,
     default: 0,
   },
+  loanProceedsAmount: {
+    type: Number,
+    default: 0,
+  },
+  loanProceedsData: {
+    interest: {
+      type: Number,
+      default: 0,
+    },
+    serviceFee: {
+      type: Number,
+      default: 0,
+    },
+    retention: {
+      type: Number,
+      default: 0,
+    },
+    unpaidLoans: {
+      type: Number,
+      default: 0,
+    },
+    insurance: {
+      type: Number,
+      default: 0,
+    },
+    surcharge: {
+      type: Number,
+      default: 0,
+    },
+  },
   userId: {
     type: Types.ObjectId,
     ref: "User",
