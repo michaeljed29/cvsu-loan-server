@@ -88,11 +88,11 @@ const setLoanProceeds = async (req, res) => {
 const setLoanStatus = async (req, res) => {
   try {
     const { id } = req.params;
-    const { status, approverId } = req.body;
+    const { status, approverId, rejectMessage } = req.body;
 
     const result = await LoanModel.findByIdAndUpdate(
       id,
-      { status },
+      { status, rejectMessage },
       {
         new: true,
       }

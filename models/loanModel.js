@@ -19,6 +19,9 @@ const loanSchema = mongoose.Schema({
     type: String,
     default: "pending",
   },
+  rejectMessage: {
+    type: String,
+  },
   verificationCode: {
     type: String,
   },
