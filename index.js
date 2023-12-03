@@ -25,8 +25,8 @@ app.get("/", (req, res) => {
   res.send("Hello to CVSU-LOAN API");
 });
 
-const CONNECTION_STRING = process.env.CONNECTION_STRING;
-const PORT = process.env.PORT || 5000;
+const CONNECTION_STRING = process.env.CONNECTION_STRING_PRACTICE;
+const PORT = process.env.PORT || 6000;
 
 // then method is a function that will run once successfully connected to the database
 // catch method will run and printing the message error if there is an error connecting to the database
